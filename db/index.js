@@ -11,15 +11,11 @@ const pool = new Pool({
   port: 5432
 });
 
+// Handle Errors
+pool.on('error', (err) => {
+  console.log(error.stack)
+});
+
 module.exports = {
-  query: (text, params, callback) => {
-    const start = Date.now()
-    return pool.query(text, params, (err, res) => {
-      const duration = Date.now() - start
-      if (res) {
-        console.log('executed query', { text, duration, rows: res.rowsCount })
-      }
-      callback(err, res)
-    })
-  }
+  query: (text, params) => pool.query(text, params)
 }
