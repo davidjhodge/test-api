@@ -1,0 +1,8 @@
+{
+    "name": "David's API Documentation",
+    "version": "1.0.0",
+    "description": "The complete documentation for David's Node.js API, which relies on a PostgreSQL database.",
+    "template": {
+        "forceLanguage": "en"
+    }
+}
