@@ -8,6 +8,8 @@ const app = express()
 applyMiddleware(app)
 mountRoutes(app)
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
   console.log('Now listening at http://localhost:3000/.')
 })
+
+module.exports = server
