@@ -91,13 +91,26 @@ router.post('/login', async(req, res) => {
   }
 })
 
+// GET All Users
+router.get('/', isAuthenticated, async(req, res) => {
+  try {
+    const result = await db.query(
+      'SELECT id, username, created_at FROM users LIMIT 10'
+    )
+    const users = result.rows
+    res.send(users)
+  } catch (e) {
+    res.status(500).send({ "error": e.name, "message": e.message })
+  }
+})
+
 // GET User
 router.get('/:id', isAuthenticated, async(req, res) => {
   req.checkParams('id', 'That user id is not valid.').notEmpty().isAlphanumeric()
 
   try {
     const result = await db.query(
-      'SELECT id, username, created_at FROM users WHERE id = $1'
+      'SELECT id, username, created_at FROM users WHERE id = $1',
       [req.params.id]
     )
     const user = result.rows[0]

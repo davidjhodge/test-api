@@ -27,7 +27,7 @@ const isAuthenticated = (req, res, next) => {
         )
         const user = result.rows[0]
         if (result && user) {
-          res.send(user)
+          next()
         } else {
           // If http error or user does not exist, throw 401
           res.status(404).send({ "error": "User not found", "message": "The user was not found in the database." })
